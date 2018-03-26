@@ -45,7 +45,7 @@
 
   > **Component**
   >
-  > Base class for everything attached to GameObjects.
+  > *Base class for everything attached to GameObjects.*
   >
   > 组件是所有附属于游戏对象的基类。
 
