@@ -109,7 +109,7 @@
   >
   > *The **GameObjects** are the fundamental objects in Unity that represent characters, props and scenery. They do not accomplish much in themselves but they act as containers for Components, which implement the real functionality.*
   >
-  > 游戏对象是代表人物、道具和布景的基本对象。它们本身没有实现太多功能，但它们充当组件的容器，而容器实现真正的功能。
+  > 游戏对象是代表人物、道具和场景的基本对象。它们本身没有实现太多功能，但它们充当组件的容器，而组件实现真正的功能。
 
   >  **Transform** 
   >
