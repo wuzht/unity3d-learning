@@ -68,11 +68,11 @@ public class FirstController : MonoBehaviour, ISceneController, IUserAction {
 			whichCoast.GetOnCoast(characterController);
 
 		}
-        else {									// character on coast
+        else {
 			CoastController whichCoast = characterController.GetCoastController();
-			if (boat.GetEmptyIndex() == -1)		// boat is full
+			if (boat.GetEmptyIndex() == -1)
 				return;
-			if (whichCoast.GetToOrFrom() != boat.Get_to_or_from())	// boat is not on the side of character
+			if (whichCoast.GetToOrFrom() != boat.Get_to_or_from())
 				return;
 			whichCoast.GetOffCoast(characterController.GetName());
             characterController.MoveToPosition (boat.GetEmptyPosition());

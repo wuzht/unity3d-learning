@@ -79,7 +79,7 @@ public class CoastController
         {
             if (passengerPlaner[i] == null)
                 continue;
-            if (passengerPlaner[i].MyGetType() == 0) // 0->priest, 1->devil
+            if (passengerPlaner[i].MyGetType() == 0) // priest 0, devil 1
                 count[0]++;
             else
                 count[1]++;
