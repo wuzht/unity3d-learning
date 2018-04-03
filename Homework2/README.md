@@ -210,5 +210,10 @@
 
   > ![](images/2_1.png)
 
-  [演示视频](PriestsAndDevilsMovie.mp4)
+* 效果图
+
+  > ![](images/2_2.png)
+
+* [演示视频](PriestsAndDevilsMovie.mp4)
+
 
