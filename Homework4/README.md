@@ -4,7 +4,7 @@
 >
 > 与游戏世界交互
 >
-> **演示视频：**http://v.youku.com/v_show/id_XMzU0NDkxNDYzNg==.html?spm=a2hzp.8244740.0.0
+> **演示视频：** http://v.youku.com/v_show/id_XMzU0NDkxNDYzNg==.html?spm=a2hzp.8244740.0.0
 
 编写一个简单的鼠标打飞碟（Hit UFO）游戏
 
