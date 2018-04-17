@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UserGUI : MonoBehaviour
 {
-    private FirstSceneControl sceneController;
+    private FirstSceneController sceneController;
     private IUserAction action;
     private bool isGameStart = false;
     void Start()
     {
-        sceneController = (FirstSceneControl)SSDirector.GetInstance().currentSceneController;
+        sceneController = (FirstSceneController)SSDirector.GetInstance().currentSceneController;
         action = SSDirector.GetInstance().currentSceneController as IUserAction;
     }
 

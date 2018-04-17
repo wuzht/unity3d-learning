@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 2124612457}
   - component: {fileID: 2124612456}
   - component: {fileID: 2124612455}
-  - component: {fileID: 2124612461}
+  - component: {fileID: 2124612460}
   - component: {fileID: 2124612459}
   - component: {fileID: 2124612462}
   m_Layer: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
   sceneController: {fileID: 0}
   Fly: []
   DiskNumber: 0
---- !u!114 &2124612461
+--- !u!114 &2124612460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2124612454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 685cccbdcf547034a8996712d4d4f9fa, type: 3}
+  m_Script: {fileID: 11500000, guid: b7bd63d08bba2af4e8d07c3cabb7cded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentRound: -1

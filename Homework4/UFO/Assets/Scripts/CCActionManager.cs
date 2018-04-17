@@ -6,7 +6,7 @@ using UnityEngine;
 public class CCActionManager : SSActionManager, ISSActionCallback
 {
 
-    public FirstSceneControl sceneController;
+    public FirstSceneController sceneController;
     public List<CCFlyAction> Fly;
     public int DiskNumber = 0;
     private List<SSAction> used = new List<SSAction>();
@@ -48,7 +48,7 @@ public class CCActionManager : SSActionManager, ISSActionCallback
 
     protected new void Start()
     {
-        sceneController = (FirstSceneControl)SSDirector.GetInstance().currentSceneController;
+        sceneController = (FirstSceneController)SSDirector.GetInstance().currentSceneController;
         sceneController.actionManager = this;
         Fly.Add(CCFlyAction.GetSSAction());
     }

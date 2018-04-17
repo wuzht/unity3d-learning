@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstSceneControl : MonoBehaviour, ISceneController, IUserAction
+public class FirstSceneController : MonoBehaviour, ISceneController, IUserAction
 {
     public CCActionManager actionManager { get; set; }
     public ScoreRecorder scoreRecorder { get; set; }
@@ -36,7 +36,7 @@ public class FirstSceneControl : MonoBehaviour, ISceneController, IUserAction
 
         if (actionManager.DiskNumber == 0 && gameState == GameState.ROUND_START)
         {
-            currentRound = (currentRound + 1) % round;
+            currentRound++;
             NextRound();
             actionManager.DiskNumber = 10;
             gameState = GameState.RUNNING;
