@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CCActionManager : MonoBehaviour, ISSActionCallback, IActionManager
+public class PhysicActionManager : MonoBehaviour, IActionManager, ISSActionCallback
 {
-
     public FirstSceneController sceneController;
-    //public List<CCFlyAction> Fly;
     public int DiskNumber = 0;
-    //private List<SSAction> used = new List<SSAction>();
-    //private List<SSAction> free = new List<SSAction>();
-    private Dictionary<int, SSAction> actions = new Dictionary<int, SSAction>();
     private List<SSAction> waitingAdd = new List<SSAction>();
     private List<int> waitingDelete = new List<int>();
+    private Dictionary<int, SSAction> actions = new Dictionary<int, SSAction>();
+    
+    protected void Start()
+    {
+        sceneController = (FirstSceneController)SSDirector.GetInstance().currentSceneController;
+        sceneController.actionManager = this;
 
-    protected void Update()
+    }
+
+    protected void FixedUpdate()
     {
         foreach (SSAction ac in waitingAdd)
             actions[ac.GetInstanceID()] = ac;
-
         waitingAdd.Clear();
 
         foreach (KeyValuePair<int, SSAction> kv in actions)
@@ -31,7 +32,7 @@ public class CCActionManager : MonoBehaviour, ISSActionCallback, IActionManager
             }
             else if (ac.enable)
             {
-                ac.Update();
+                ac.FixedUpdate();
             }
         }
 
@@ -53,23 +54,12 @@ public class CCActionManager : MonoBehaviour, ISSActionCallback, IActionManager
         action.Start();
     }
 
-
-    protected void Start()
-    {
-        sceneController = (FirstSceneController)SSDirector.GetInstance().currentSceneController;
-        sceneController.actionManager = this;
-    }
-
-    public void SSActionEvent(SSAction source, SSActionEventType events = SSActionEventType.Completed,
-        int intParam = 0, string strParam = null, UnityEngine.Object objectParam = null)
+    public void SSActionEvent(SSAction source, SSActionEventType events = SSActionEventType.Completed, int intParam = 0,
+        string strParam = null, UnityEngine.Object objectParam = null)
     {
         if (source is CCFlyAction)
         {
             DiskNumber--;
-            /*
-            DiskFactory df = Singleton<DiskFactory>.Instance;
-            df.FreeDisk(source.gameobject);
-            FreeSSAction(source);*/
             source.gameobject.SetActive(false);
         }
     }
@@ -91,5 +81,5 @@ public class CCActionManager : MonoBehaviour, ISSActionCallback, IActionManager
     public int getDiskNumber()
     {
         return DiskNumber;
-    } 
+    }  
 }

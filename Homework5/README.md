@@ -4,7 +4,7 @@
 >
 > 物理系统与碰撞
 >
-> **演示视频：** 
+> **演示视频：** http://v.youku.com/v_show/id_XMzU2MjQwOTUxMg==.html?spm=a2h3j.8428770.3416059.1
 
 ### 改进飞碟（Hit UFO）游戏：
 

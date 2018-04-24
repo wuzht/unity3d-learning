@@ -5,8 +5,9 @@ using UnityEngine;
 public class DiskFactory : MonoBehaviour
 {
     public GameObject diskPrefab;
-    private List<DiskData> used = new List<DiskData>();
+    private Dictionary<int, DiskData> used = new Dictionary<int, DiskData>();
     private List<DiskData> free = new List<DiskData>();
+    private List<int> wait = new List<int>();
 
     private void Awake()
     {
@@ -14,7 +15,26 @@ public class DiskFactory : MonoBehaviour
         diskPrefab.SetActive(false);
     }
 
-    public GameObject GetDisk(int round)
+    private void Update()
+    {
+
+        foreach (var tmp in used.Values)
+        {
+
+            if (!tmp.gameObject.activeSelf)
+            {
+                wait.Add(tmp.GetInstanceID());
+            }
+        }
+
+        foreach (int tmp in wait)
+        {
+            FreeDisk(used[tmp].gameObject);
+        }
+        wait.Clear();
+    }
+
+    public GameObject GetDisk(int round, ActionMode mode)
     {
         GameObject newDisk = null;
         if (free.Count > 0)
@@ -46,12 +66,13 @@ public class DiskFactory : MonoBehaviour
             round = 0;
         }
 
+        DiskData diskdata = newDisk.GetComponent<DiskData>();
         switch (round)
         {
             case 0:
                 {
                     newDisk.GetComponent<DiskData>().color = Color.blue;
-                    newDisk.GetComponent<DiskData>().speed = 10;
+                    newDisk.GetComponent<DiskData>().speed = 6;
                     float RanX = UnityEngine.Random.Range(-1f, 1f) < 0 ? -1 : 1;
                     newDisk.GetComponent<DiskData>().direction = new Vector3(RanX, 0, -1);
                     newDisk.GetComponent<Renderer>().material.color = Color.blue;
@@ -60,7 +81,7 @@ public class DiskFactory : MonoBehaviour
             case 1:
                 {
                     newDisk.GetComponent<DiskData>().color = Color.yellow;
-                    newDisk.GetComponent<DiskData>().speed = 15;
+                    newDisk.GetComponent<DiskData>().speed = 10;
                     float RanX = UnityEngine.Random.Range(-1f, 1f) < 0 ? -1 : 1;
                     newDisk.GetComponent<DiskData>().direction = new Vector3(RanX, 0, -1);
                     newDisk.GetComponent<Renderer>().material.color = Color.yellow;
@@ -69,33 +90,40 @@ public class DiskFactory : MonoBehaviour
             case 2:
                 {
                     newDisk.GetComponent<DiskData>().color = Color.red;
-                    newDisk.GetComponent<DiskData>().speed = 20;
+                    newDisk.GetComponent<DiskData>().speed = 14;
                     float RanX = UnityEngine.Random.Range(-1f, 1f) < 0 ? -1 : 1;
                     newDisk.GetComponent<DiskData>().direction = new Vector3(RanX, 0, -1);
                     newDisk.GetComponent<Renderer>().material.color = Color.red;
                     break;
                 }
         }
-        used.Add(newDisk.GetComponent<DiskData>());
+        if (mode == ActionMode.PHYSIC)
+        {
+            if (newDisk.GetComponent<Rigidbody>() == null)
+                newDisk.AddComponent<Rigidbody>();
+        }
+
+        used.Add(diskdata.GetInstanceID(), diskdata);
+        newDisk.name = newDisk.GetInstanceID().ToString();
         newDisk.name = newDisk.GetInstanceID().ToString();
         return newDisk;
     }
 
     public void FreeDisk(GameObject disk)
     {
-        DiskData tmp = null;
-        foreach (DiskData i in used)
+        DiskData temp = null;
+        foreach (DiskData i in used.Values)
         {
             if (disk.GetInstanceID() == i.gameObject.GetInstanceID())
             {
-                tmp = i;
+                temp = i;
             }
         }
-        if (tmp != null)
+        if (temp != null)
         {
-            tmp.gameObject.SetActive(false);
-            free.Add(tmp);
-            used.Remove(tmp);
+            temp.gameObject.SetActive(false);
+            free.Add(temp);
+            used.Remove(temp.GetInstanceID());
         }
     }
 }

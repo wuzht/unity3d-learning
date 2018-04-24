@@ -26,6 +26,7 @@ public class SSDirector : System.Object
 }
 
 public enum GameState { ROUND_START, ROUND_FINISH, RUNNING, PAUSE, START }
+public enum ActionMode { PHYSIC, KINEMATIC, NOTSET }
 
 public interface IUserAction
 {
@@ -34,9 +35,18 @@ public interface IUserAction
     void SetGameState(GameState gs);
     int GetScore();
     void Hit(Vector3 pos);
+    ActionMode GetMode();
+    void SetMode(ActionMode m);
 }
 
 public interface ISceneController
 {
     void LoadResources();
+}
+
+public interface IActionManager
+{
+    void StartThrow(Queue<GameObject> diskQueue);
+    int getDiskNumber();
+    void setDiskNumber(int num);
 }

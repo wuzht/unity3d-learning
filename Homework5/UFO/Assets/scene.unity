@@ -268,13 +268,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2124612454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f6159ab67d64740b027a91783f6401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneController: {fileID: 0}
-  Fly: []
   DiskNumber: 0
 --- !u!114 &2124612460
 MonoBehaviour:

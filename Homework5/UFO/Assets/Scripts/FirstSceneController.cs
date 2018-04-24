@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FirstSceneController : MonoBehaviour, ISceneController, IUserAction
 {
-    public CCActionManager actionManager { get; set; }
+    public ActionMode mode { get; set; }
+    public IActionManager actionManager { get; set; }
     public ScoreRecorder scoreRecorder { get; set; }
     public Queue<GameObject> diskQueue = new Queue<GameObject>();
     private int diskNumber;
@@ -22,6 +23,8 @@ public class FirstSceneController : MonoBehaviour, ISceneController, IUserAction
         diskNumber = 10;
         gameObject.AddComponent<ScoreRecorder>();
         gameObject.AddComponent<DiskFactory>();
+        gameObject.AddComponent<CCFlyActionFactory>();
+        mode = ActionMode.NOTSET;
         scoreRecorder = Singleton<ScoreRecorder>.Instance;
         LoadResources();
     }
@@ -29,26 +32,29 @@ public class FirstSceneController : MonoBehaviour, ISceneController, IUserAction
 
     private void Update()
     { 
-        if (actionManager.DiskNumber == 0 && gameState == GameState.RUNNING)
+        if (mode != ActionMode.NOTSET && actionManager != null)
         {
-            gameState = GameState.ROUND_FINISH;    
-        }
+            if (actionManager.getDiskNumber() == 0 && gameState == GameState.RUNNING)
+            {
+                gameState = GameState.ROUND_FINISH;
+            }
 
-        if (actionManager.DiskNumber == 0 && gameState == GameState.ROUND_START)
-        {
-            currentRound++;
-            NextRound();
-            actionManager.DiskNumber = 10;
-            gameState = GameState.RUNNING;
-        }
+            if (actionManager.getDiskNumber() == 0 && gameState == GameState.ROUND_START)
+            {
+                currentRound++;
+                NextRound();
+                actionManager.setDiskNumber(10);
+                gameState = GameState.RUNNING;
+            }
 
-        if (time > 1)
-        {
-            ThrowDisk();
-            time = 0;
-        }
-        else
-            time += Time.deltaTime;
+            if (time > 1)
+            {
+                ThrowDisk();
+                time = 0;
+            }
+            else
+                time += Time.deltaTime;
+        }  
     }
 
     private void NextRound()
@@ -56,7 +62,7 @@ public class FirstSceneController : MonoBehaviour, ISceneController, IUserAction
         DiskFactory df = Singleton<DiskFactory>.Instance;
         for (int i = 0; i < diskNumber; i++)
         {
-            diskQueue.Enqueue(df.GetDisk(currentRound));
+            diskQueue.Enqueue(df.GetDisk(currentRound, mode));
         }
         actionManager.StartThrow(diskQueue);
     }
@@ -107,8 +113,26 @@ public class FirstSceneController : MonoBehaviour, ISceneController, IUserAction
             if (hit.collider.gameObject.GetComponent<DiskData>() != null)
             {
                 scoreRecorder.Record(hit.collider.gameObject);
-                hit.collider.gameObject.transform.position = new Vector3(0, -5, 0);
+                hit.collider.gameObject.transform.position = new Vector3(0, -50, 0);
             }
         }
+    }
+    public void SetMode(ActionMode m)
+    {
+
+        if (m == ActionMode.KINEMATIC)
+        {
+            this.gameObject.AddComponent<CCActionManager>();
+        }
+        else
+        {
+            this.gameObject.AddComponent<PhysicActionManager>();
+        }
+        mode = m;
+    }
+
+    public ActionMode GetMode()
+    {
+        return mode;
     }
 }
