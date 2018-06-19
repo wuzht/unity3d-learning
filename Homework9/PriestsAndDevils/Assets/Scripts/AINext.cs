@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AINext {
 
-    private int[] parentIndex = new int[16];
     public enum Vertex { P3D3B, P2D2, P3D2, P3D1, P3D2B,
                          P3D1B, P3D0, P1D1, P2D2B, P0D2,
                          P0D3B, P2D1B, P0D1, P1D1B, P0D2B, P0D0}
     public enum Edge { P, D, PP, DD, PD, NONE};
     private Edge[,] graph = new Edge[16, 16];
     private bool[] isVisited = new bool[16];
+    private int[] parentIndex = new int[16];    // 记录父节点的index，用于回溯找出下一步
 
     // 画图
     public AINext()
