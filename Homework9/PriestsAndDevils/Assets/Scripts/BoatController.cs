@@ -13,7 +13,7 @@ public class BoatController
     readonly Vector3[] fromPositions;
     readonly Vector3[] toPositions;
     public int toOrFrom; // to -1, from 1
-    ICharacterController[] passenger = new ICharacterController[2];
+    public ICharacterController[] passenger = new ICharacterController[2];
 
     public BoatController()
     {

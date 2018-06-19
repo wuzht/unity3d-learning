@@ -9,7 +9,7 @@ public class CoastController
     readonly Vector3 to_pos = new Vector3(-9, 1, 0);
     readonly Vector3[] positions;
     readonly int toOrFrom;  // to -1, from 1
-    ICharacterController[] passengerPlaner;
+    public ICharacterController[] passengerPlaner;
 
     public CoastController(string toOrFrom_str)
     {

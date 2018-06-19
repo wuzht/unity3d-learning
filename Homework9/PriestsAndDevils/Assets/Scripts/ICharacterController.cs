@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ICharacterController
 {
-    readonly GameObject character;
+    public GameObject character;
     //readonly Move moveableScript;
     readonly ClickUI clickUI;
     readonly int characterType; // priest 0, devil 1

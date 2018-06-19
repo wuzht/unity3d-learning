@@ -21,9 +21,9 @@ public class UserUI : MonoBehaviour {
 				status = 0;
 			}
 		}
-        if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2 - 100, 100, 20), "Next"))
+        if (GUI.Button(new Rect(Screen.width / 2 - 30, Screen.height / 2 - 140, 100, 20), "Next"))
         {
-            action.NextOnBoat();
+            action.NextStep();
         }
-	}
+    }
 }

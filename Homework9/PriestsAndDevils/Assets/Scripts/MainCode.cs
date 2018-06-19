@@ -28,10 +28,13 @@ public interface IUserAction {
     void CharacterIsClicked(ICharacterController characterController, GameObject clickedObject);
     void ReStart();
 
+    void GetOnBoat(int type);
+    void GetOffBoat();
+    void InvokeMoveBoat();
+
     // AI
-    void NextOnBoat();
-    void NextOffBoat();
-    bool GetNextStatus();
+    void NextStep();
+    
 }
 
 public interface ISceneController {
