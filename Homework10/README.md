@@ -20,7 +20,7 @@
 2. 在NetworkManager里添加组件：NetworkManager、NetworkManagerHUD
 3. 保存场景到Assets
 
-###2、创建Online场景
+### 2、创建Online场景
 
 1. 如下图，分别创建Scroll View、InputField、Button，并设定好它们的布局
 
