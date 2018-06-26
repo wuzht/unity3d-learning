@@ -8,8 +8,6 @@
 
 ## 效果GIF
 
-看这个gif就行了，已经详细录制全过程，不再录视频
-
 ![](img/NetworkChat.gif)
 
 ## 实现
